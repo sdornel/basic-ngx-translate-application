@@ -1,4 +1,6 @@
 # BasicNgxTranslateApplication
+This application translates a line from Cinderella as well as the first two lines of Salammbô into English, Spanish, French (default), Romanian, Russian, and Uzebek. It uses [ngx-translate](https://github.com/ngx-translate/core)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
