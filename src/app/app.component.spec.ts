@@ -1,35 +1,22 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { Language } from './enums/language.enum';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { of, Subject } from 'rxjs';
+import { JsonConverterService } from './services/json-converter.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let translateService: TranslateService;
+  let jsonConverterService: JsonConverterService;
 
-  const onTranslationChange$ = new Subject();
-  const onLangChange$ = new Subject();
-  const onDefaultLangChange$ = new Subject();
-
-  const mockTranslateService = {
-    setDefaultLang: jasmine.createSpy('setDefaultLang'),
-    use: jasmine.createSpy('use'),
-    get: jasmine.createSpy('get').and.returnValue(of('mocked value')),
-    onTranslationChange: onTranslationChange$.asObservable(),
-    onLangChange: onLangChange$.asObservable(),
-    onDefaultLangChange: onDefaultLangChange$.asObservable(),
+  const mockService = {
+    getTranslationKeys: jasmine.createSpy(),
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [],
       declarations: [AppComponent],
       providers: [
-        { provide: TranslateService, useValue: mockTranslateService }
+        { provide: JsonConverterService, useValue: mockService }
       ]
     }).compileComponents();
   });
@@ -37,7 +24,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    translateService = TestBed.inject(TranslateService);
+    // jsonConverterService = TestBed.inject(jsonConverterService);
     fixture.detectChanges();
   });
 
