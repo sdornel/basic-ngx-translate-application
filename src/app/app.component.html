@@ -3,21 +3,10 @@
     <h1>{{ 'WELCOME' | translate }}</h1>
   </header>
 
-  <div class="language-selector">
-    <label for="language-select">{{ 'SELECT_LANGUAGE' | translate }}</label>
-    <select id="language-select" (change)="switchLanguage($event)">
-      <option [value]="Language.French">Français</option>
-      <option [value]="Language.English">English</option>
-      <option [value]="Language.Romanian">Română</option>
-      <option [value]="Language.Russian">Русский</option>
-      <option [value]="Language.Spanish">Español</option>
-      <option [value]="Language.Uzbek">O‘zbek</option>
-    </select>
-  </div>
-
   <section class="story">
     <h2 class="story-title">SALAMMBÔ</h2>
-    <p class="story-paragraph">{{ 'FIRST_PARAGRAPH' | translate }}</p>
-    <p class="story-paragraph">{{ 'SECOND_PARAGRAPH' | translate }}</p>
+    <div *ngFor="let paragraph of paragraphs">
+      <app-paragraph [translationKey]="paragraph"></app-paragraph>
+    </div>
   </section>
 </div>

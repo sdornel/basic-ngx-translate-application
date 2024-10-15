@@ -1,0 +1,11 @@
+<div class="paragraph-container">
+    <select (change)="switchLanguage($event)">
+      <option [value]="Language.French" [selected]="currentLanguage === Language.French">Français</option>
+      <option [value]="Language.English" [selected]="currentLanguage === Language.English">English</option>
+      <option [value]="Language.Romanian" [selected]="currentLanguage === Language.Romanian">Română</option>
+      <option [value]="Language.Russian" [selected]="currentLanguage === Language.Russian">Русский</option>
+      <option [value]="Language.Spanish" [selected]="currentLanguage === Language.Spanish">Español</option>
+      <option [value]="Language.Uzbek" [selected]="currentLanguage === Language.Uzbek">O‘zbek</option>
+    </select>
+    <p>{{ translatedText }}</p>
+  </div>
