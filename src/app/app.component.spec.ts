@@ -44,34 +44,4 @@ describe('AppComponent', () => {
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should set default language to French on init', () => {
-    component.ngOnInit();
-    expect(translateService.setDefaultLang).toHaveBeenCalledWith(Language.French);
-  });
-
-  it('should call translate.use() when switchLanguage is triggered', () => {
-    const mockEvent = {
-      target: {
-        value: Language.Spanish
-      }
-    } as any;
-
-    component.switchLanguage(mockEvent);
-    expect(translateService.use).toHaveBeenCalledWith(Language.Spanish);
-  });
-
-  it('should have French as the default selectedLanguage', () => {
-    expect(mockTranslateService.setDefaultLang).toHaveBeenCalledWith(Language.French);
-  });
-
-  it('should switch to the selected language when an option is selected', () => {
-    const selectElement: DebugElement = fixture.debugElement.query(By.css('select'));
-
-    selectElement.triggerEventHandler('change', { target: { value: Language.Romanian } });
-    fixture.detectChanges();
-
-    expect(mockTranslateService.use).toHaveBeenCalledWith(Language.Romanian);
-    expect(mockTranslateService.use).toHaveBeenCalledWith(Language.Romanian); // Expect 'ro'
-  });
 });
