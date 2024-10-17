@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
     private jsonConverterService: JsonConverterService,
   ) {}
 
+  // TODO: Add a way to change the entire text into one language. Right now it goes by paragraph.
+
   ngOnInit(): void {
     this.loadTranslationKeys();
   }
