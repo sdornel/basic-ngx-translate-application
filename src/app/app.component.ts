@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import { Language } from './enums/language.enum';
+import { JsonConverterService } from './services/json-converter.service';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +7,20 @@ import { Language } from './enums/language.enum';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  Language = Language; // make enum accessible in template
+  paragraphs: Array<string> = [];
 
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private jsonConverterService: JsonConverterService,
+  ) {}
+
+  // TODO: Add a way to change the entire text into one language. Right now it goes by paragraph.
 
   ngOnInit(): void {
-    // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang(Language.French);
+    this.loadTranslationKeys();
   }
 
-  switchLanguage(event: Event) {
-    const language = (event.target as HTMLSelectElement).value
-    this.translate.use(language);
+  async loadTranslationKeys() {
+    const keys: Array<string> = await this.jsonConverterService.getTranslationKeys();
+    this.paragraphs = keys.filter((key: string) => key.includes('PARAGRAPH')); // filter out keys related to paragraphs
   }
 }
