@@ -9,26 +9,43 @@ import { Language } from '../enums/language.enum';
 })
 export class ParagraphComponent implements OnInit {
   @Input() translationKey!: string;
+  translatedText: string = '';
   Language = Language; // make available in template
   currentLanguage: Language = Language.French;
-  translatedText: string = '';
 
   constructor(private customTranslateService: CustomTranslationService) {}
 
   ngOnInit(): void {
-    this.loadTranslation(this.currentLanguage);
+    this.loadTranslation();
+
+    // Listen for global language changes
+    this.customTranslateService.onLanguageChange().subscribe(() => {
+      this.loadTranslation();
+    });
   }
 
-  loadTranslation(language: Language) {
-    this.customTranslateService.getTranslationByKey(language || Language.French, this.translationKey)
+  // Load translation for current global language
+  loadTranslation() {
+    this.customTranslateService.getCurrentTranslationByKey(this.translationKey)
       .subscribe(translatedText => {
         this.translatedText = translatedText;
       });
   }
 
+  // Handle language change event
   switchLanguage(event: Event) {
-    const language: Language = (event.target as HTMLSelectElement).value as Language;
-    this.currentLanguage = language;
-    this.loadTranslation(language);
+    const selectElement = event.target as HTMLSelectElement;
+    const language = selectElement?.value as Language;
+    if (language) {
+      this.loadTranslationByLanguage(language);
+    }
+  }
+
+  // Load translation for specific language
+  loadTranslationByLanguage(language: Language) {
+    this.customTranslateService.getTranslationByKey(language, this.translationKey)
+      .subscribe(translatedText => {
+        this.translatedText = translatedText;
+      });
   }
 }
