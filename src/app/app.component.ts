@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   // Change the language globally
-  globalSwitchLanguage(event: Event) {
+  globalSwitchLanguage(event: Event) { // this does not change paragraph component langs... need to do that
     const language: Language = (event.target as HTMLSelectElement).value as Language;
     this.customTranslationService.changeLanguage(language);
   }
