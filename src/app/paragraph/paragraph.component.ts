@@ -11,7 +11,6 @@ export class ParagraphComponent implements OnInit {
   @Input() translationKey!: string;
   translatedText: string = '';
   Language = Language; // make available in template
-  currentLanguage: Language = Language.French;
 
   constructor(private customTranslateService: CustomTranslationService) {}
 
@@ -43,6 +42,7 @@ export class ParagraphComponent implements OnInit {
 
   // Load translation for specific language
   loadTranslationByLanguage(language: Language) {
+    console.log('this.translationKey', this.translationKey);
     this.customTranslateService.getTranslationByKey(language, this.translationKey)
       .subscribe(translatedText => {
         this.translatedText = translatedText;
