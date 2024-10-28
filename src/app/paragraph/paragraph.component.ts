@@ -9,15 +9,13 @@ import { Language } from '../enums/language.enum';
 })
 export class ParagraphComponent implements OnInit {
   @Input() translationKey!: string;
-  @Input() selectedGlobalLanguage!: Language;
+  @Input() selectedGlobalLanguage!: Language; // Uses ngModel
   translatedText: string = '';
   Language = Language; // make available in template
 
   constructor(private customTranslateService: CustomTranslationService) {}
 
   ngOnInit(): void {
-    this.loadTranslationByLanguage(this.selectedGlobalLanguage);
-
     // Listen for global language changes
     this.customTranslateService.onLanguageChange().subscribe(() => {
       this.loadTranslation();
