@@ -11,6 +11,7 @@ import { JsonConverterService } from './services/json-converter.service';
 export class AppComponent implements OnInit {
   paragraphs: Array<string> = [];
   Language = Language;
+  selectedGlobalLanguage = Language.French;
 
   constructor(
     private customTranslationService: CustomTranslationService,
@@ -27,8 +28,8 @@ export class AppComponent implements OnInit {
   }
 
   // Change the language globally
-  globalSwitchLanguage(event: Event) { // this does not change paragraph component langs... need to do that
-    const language: Language = (event.target as HTMLSelectElement).value as Language;
-    this.customTranslationService.changeLanguage(language);
+  globalSwitchLanguage(event: Event) {
+    this.selectedGlobalLanguage = (event.target as HTMLSelectElement).value as Language;
+    this.customTranslationService.changeLanguage(this.selectedGlobalLanguage);
   }
 }

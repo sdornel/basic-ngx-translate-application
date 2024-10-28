@@ -1,11 +1,11 @@
 <div class="paragraph-container">
-    <select (change)="switchLanguage($event)">
-      <option [value]="Language.French">Français</option>
-      <option [value]="Language.English">English</option>
-      <option [value]="Language.Romanian">Română</option>
-      <option [value]="Language.Russian">Русский</option>
-      <option [value]="Language.Spanish">Español</option>
-      <option [value]="Language.Uzbek">O‘zbek</option>
-    </select>
-    <p>{{ translatedText }}</p>
-  </div>
+  <select [(ngModel)]="selectedGlobalLanguage" (change)="switchLanguage($event)">
+    <option [value]="Language.French">Français</option>
+    <option [value]="Language.English">English</option>
+    <option [value]="Language.Romanian">Română</option>
+    <option [value]="Language.Russian">Русский</option>
+    <option [value]="Language.Spanish">Español</option>
+    <option [value]="Language.Uzbek">O‘zbek</option>
+  </select>
+  <p>{{ translatedText }}</p>
+</div>

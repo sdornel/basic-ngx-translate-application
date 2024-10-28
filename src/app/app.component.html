@@ -15,7 +15,8 @@
   <section class="story">
     <h2 class="story-title">SALAMMBÔ</h2>
     <div *ngFor="let paragraph of paragraphs">
-      <app-paragraph [translationKey]="paragraph"></app-paragraph>
+      <app-paragraph [translationKey]="paragraph" [selectedGlobalLanguage]="selectedGlobalLanguage"></app-paragraph>
+      <!-- <app-paragraph [translationKey]="paragraph"></app-paragraph> -->
     </div>
   </section>
 </div>
